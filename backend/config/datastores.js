@@ -12,7 +12,7 @@
  * For more information on configuring datastores, check out:
  * https://sailsjs.com/config/datastores
  */
-
+const dotenv = require("dotenv").config();
 module.exports.datastores = {
 
 
@@ -49,7 +49,7 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-postgresql',
-    url: 'postgresql://postgres:pappa@localhost:5432/Quiz',
+    url: process.env.DATABASE_URL,
 
   },
 

@@ -19,4 +19,18 @@ module.exports.policies = {
 
   // '*': true,
 
+  AdminController :{
+    logout :'isAdmin'
+  },
+  TopicController :{
+    addTopic:'isAdmin',
+    editTopic:'isAdmin',
+    deleteTopic:'isAdmin',
+    
+  },
+  QuestionContoller :{
+    addQuestion : 'isAdmin'
+  }
+
+
 };

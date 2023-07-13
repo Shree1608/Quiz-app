@@ -43,13 +43,15 @@ module.exports = {
   //List all question by topic
   listQueByTopic : async(req,res)=>{
     let topicId = req.params.id;
-    const limit = 1;
-    let {page} = req.query;
-    if(page == undefined){
-      page = 1;
-    }
-    let skip = (page - 1) * limit
-    let topic = await Topic.find({id:topicId , isDeleted:false}).populate('question',{limit:limit , skip:skip})
+    // const limit = 1;
+    // let {page} = req.query;
+    // if(page == undefined){
+    //   page = 1;
+    // }
+    // let skip = (page - 1) * limit
+    // let topic = await Topic.find({id:topicId , isDeleted:false}).populate('question',{limit:limit , skip:skip})
+
+    let topic = await Topic.find({id : topicId , isDeleted:false}).populate('question')
     if(!topic){
       return res.status(404).json({
         message :'topic not found'
