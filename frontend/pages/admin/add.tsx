@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import EditTopic from './editTopic';
 import { Button, Modal,Text } from '@nextui-org/react';
 import Link from 'next/link';
+import CommonDash from './commonDash';
 interface Topic {
   id : string;
   title : string;
@@ -29,7 +30,8 @@ const Add = () => {
       const response = await fetch(`http://127.0.0.1:1337/topic/delete/${topicId}` ,{
         method :'DELETE' ,
         headers:{
-          'Content-Type' : 'application/json'
+          'Content-Type' : 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
       if(response.ok){
@@ -72,8 +74,6 @@ const Add = () => {
 
  
   const handleAddTopic = async(e:React.MouseEvent<HTMLButtonElement>)=>{
-   
-
   // Validate the title field
     if (topic.title.trim() === "") {
       alert("Title is required");
@@ -86,6 +86,7 @@ const Add = () => {
         method:'POST',
         headers:{
           'Content-Type' :'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         },
 
         body :JSON.stringify({ ...topic})
@@ -125,7 +126,7 @@ const Add = () => {
   return (
     <div>
 <div className="flex-row lg:flex my-12">
-    <div className="flex flex-col w-full p-3 bg-white shadow lg:h-screen lg:w-72">
+    {/* <div className="flex flex-col w-full p-3 bg-white shadow lg:h-screen lg:w-72">
         <div className="space-y-3">
             <div className="flex items-center">
                 <h2 className="text-xl font-bold">Dashboard</h2>
@@ -245,7 +246,8 @@ const Add = () => {
                 </ul>
             </div>
         </div>
-    </div>
+    </div> */}
+    <CommonDash/>
     <div className="container mx-auto lg:ml-10 mt-12">
         <div className="grid sm:grid-cols-2 md:grid-cols-2 grid-cols-1 mb-6 lg:grid-cols-3">
             <div className="w-full px-4 py-5 bg-white rounded-lg shadow">

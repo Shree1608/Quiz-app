@@ -1,35 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link';
-import CommonDash from './commonDash';
-const dashboard = () => {
+import Link from 'next/link'
+import React from 'react'
 
-    const[ totalTopics , setTotaltopics] = useState(0);
-    useEffect(()=>{
-        updateTotalTopics();
-    },[]);
-    const updateTotalTopics = async () => {
-        try {
-          const response = await fetch('http://127.0.0.1:1337/topic/count',{
-            method:'GET',
-            headers:{
-                'Content-Type' :'application/json',
-                // Authorization:`Bearer ${localStorage.getItem('token')}`
-            }
-          });
-          if (response.ok) {
-            const data = await response.json();
-            setTotaltopics(data.total);
-            console.log(response);
-          } else {
-            console.error('Error occurred while fetching total tasks:', response);
-            // Handle the error here, such as displaying an error message to the user
-          }
-        } catch (error) {
-          console.error('error', error);
-        }
-      };
-
-      const handleLogout = async () =>{
+const CommonDash = () => {
+    const handleLogout = async () =>{
         try {
             const response = await fetch('http://127.0.0.1:1337/admin/logout', {
               method: 'POST',
@@ -42,7 +15,7 @@ const dashboard = () => {
               // Clear the token from localStorage
               alert('logout successfully')
               localStorage.removeItem('token');
-              window.location.href='/login'
+              window.location.href='/admin/login'
               // Redirect or perform any additional logout actions
             } else {
               console.error('Logout request failed');
@@ -50,12 +23,10 @@ const dashboard = () => {
           } catch (error) {
             console.error('Error occurred while logging out', error);
           }
-     }   
-
+     } 
   return (
     <div>
-       <div className="flex-row lg:flex my-12">
-    {/* <div className="flex flex-col w-full p-3 bg-white shadow lg:h-screen lg:w-72">
+      <div className="flex flex-col w-full p-3 bg-white shadow lg:h-screen lg:w-72">
         <div className="space-y-3">
             <div className="flex items-center">
                 <h2 className="text-xl font-bold">Dashboard</h2>
@@ -141,10 +112,22 @@ const dashboard = () => {
                             className="flex items-center p-2 space-x-3 rounded-md"
                         >
                             <img src="/4871545_pen_pencil_text_write_icon.svg" alt="" className=' h-5' />
-                            <button className='pl-1'
-                            // onClick={handleLogout}
+                            <button className=' pl-1'
+                           
                             >
                                Add Question</button>
+                        </Link>
+                    </li>
+                    <li className="rounded-sm">
+                        <Link
+                            href='/admin/allQue'
+                            className="flex items-center p-2 space-x-3 rounded-md"
+                        >
+                            <img src="/online-poll-survey-icon.svg" alt="" className=' h-8 ' />
+                            <button className=' pl-1'
+                           
+                            >
+                               All Question</button>
                         </Link>
                     </li>
                     <li className="rounded-sm">
@@ -172,40 +155,12 @@ const dashboard = () => {
                                Logout</button>
                         </Link>
                     </li>
-                    
-
                 </ul>
             </div>
         </div>
-    </div> */}
-    <CommonDash/>
-    <div className="container mx-auto lg:ml-10 mt-12">
-        <div className="grid sm:grid-cols-2 md:grid-cols-2 grid-cols-1 mb-6 lg:grid-cols-3">
-            <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                <div className="text-sm font-medium text-gray-500 truncate">
-                    Total Topics
-                </div>
-                <div className="mt-1 text-3xl font-semibold text-gray-900">
-                {totalTopics}
-                </div>
-                
-            </div>
-            <div className="w-full px-4 py-6 lg:ml-5 md:ml-5 sm:ml-5 lg:mt-0 md:mt-0 sm:mt-0 mt-5 bg-white rounded-lg shadow">
-                <div className="text-sm font-medium text-gray-500 truncate">
-                    Total Topics
-                </div>
-                <div className="mt-1 text-3xl font-semibold text-gray-500">
-                {totalTopics}
-                </div>
-            </div>
-        
-        </div>
     </div>
-    
-</div>
     </div>
-
   )
 }
 
-export default dashboard
+export default CommonDash

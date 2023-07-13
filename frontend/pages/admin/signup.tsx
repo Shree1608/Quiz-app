@@ -119,7 +119,7 @@ let signup = () => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Already have an account?{' '}
-            <a href="/login" className="font-semibold leading-6 text-blue-800 hover:blue-900">
+            <a href="/admin/login" className="font-semibold leading-6 text-blue-800 hover:blue-900">
               Sing In
             </a>
           </p>

@@ -9,7 +9,9 @@ const login = () => {
        const response = await fetch('http://127.0.0.1:1337/admin/login' , {
         method :'POST' , 
         headers :{
-          'Content-Type' :'application/json'
+          'Content-Type' :'application/json',
+          
+
         },
         body : JSON.stringify({ ...form , action:'login'}) 
        })
@@ -21,7 +23,7 @@ const login = () => {
       // Store the token in localStorage
         localStorage.setItem('token' , content.token)
 
-      // Update the token state in your component (if necessary)
+      // Update the token state )
       setToken(content.token);
 
         window.location.href = '/admin/dashboard'

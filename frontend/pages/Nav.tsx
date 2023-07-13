@@ -27,7 +27,7 @@ const Nav = () => {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Pages
+          Home
         </a>
       </Typography>
       <Typography
@@ -37,7 +37,7 @@ const Nav = () => {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Account
+          Topics
         </a>
       </Typography>
       <Typography
@@ -47,7 +47,7 @@ const Nav = () => {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Blocks
+          Blogs
         </a>
       </Typography>
       <Typography
@@ -72,14 +72,14 @@ const Nav = () => {
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium text-black"
           >
-            Material Tailwind
+            Quizo
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <Button
               variant="gradient"
               size="sm"
-              className="hidden lg:inline-block bg-blue-700 text-white rounded-lg"
+              className="hidden lg:inline-block bg-cyan-600 hover:bg-cyan-800 text-white rounded-lg"
             >
               <span>Start Quiz</span>
             </Button>
@@ -124,7 +124,7 @@ const Nav = () => {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2 bg-blue-700 text-white rounded-lg">
+          <Button variant="gradient" size="sm" fullWidth className="mb-2 bg-cyan-600  hover:bg-cyan-800 text-white rounded-lg">
             <span>Start Quiz</span>
           </Button>
         </MobileNav>

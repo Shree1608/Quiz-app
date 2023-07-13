@@ -22,8 +22,6 @@ const EditTopic = ({topicData} : EditProps) => {
     setTopic(topicData);
   }, [topicData]);
   const handleEditTopic = async(e:React.MouseEvent<HTMLButtonElement>)=>{
-   
-
   // Validate the title field
     if (topic.title.trim() === "") {
       alert("Title is required");
@@ -36,6 +34,7 @@ const EditTopic = ({topicData} : EditProps) => {
         method:'PATCH',
         headers:{
           'Content-Type' :'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         },
 
         body :JSON.stringify({ ...topic})
