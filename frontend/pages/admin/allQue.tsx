@@ -79,64 +79,91 @@ const allQue = () => {
       
       </Table.Head>
       <Table.Body className="divide-y">
-        {que.map((form ,index)=>(
-        <Table.Row key={form.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            {index+1}
-          </Table.Cell>
-          <Table.Cell>
-           {form.topic.title}
-          </Table.Cell>
-          <Table.Cell>
-          {form.question}
-          </Table.Cell>
-          <Table.Cell>
-              <ul className=' list-decimal'>
-                {form.options.map((option:any , index:number)=>(
-                    <li key={index} >{option}</li>
+                {que.map((form, index) => (
+                  <Table.Row
+                    key={form.id}
+                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                  >
+                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                      {index + 1}
+                    </Table.Cell>
+                    <Table.Cell>{form.title}</Table.Cell>
+                    {form.question.length === 0 ? (
+                      <Table.Cell>--</Table.Cell>
+                    ) : (
+                      form.question.map((que1: any, index: number) => (
+                        <Table.Cell key={index}>
+                          {que1.question}
+                        </Table.Cell>
+                      ))
+                    )}
+                    {form.question.length === 0 ? (
+                      <Table.Cell>--</Table.Cell>
+                    ) : (
+                      form.question.map((que1: any, index: number) => (
+                        <Table.Cell key={index}>
+                            <ul className="list-decimal">
+                              {que1.options.map((option: any, index: number) => (
+                                <li key={index}>{option}</li>
+                              ))}
+                            </ul>
+                         
+                        </Table.Cell>
+                      ))
+                    )}
+                    {form.question.length === 0 ? (
+                      <Table.Cell>--</Table.Cell>
+                    ) : (
+                      form.question.map((que1: any, index: number) => (
+                        <Table.Cell key={index}>
+                          {que1.answer}
+                        </Table.Cell>
+                      ))
+                    )}
+                    {form.question.length === 0 ? (
+                      <Table.Cell>--</Table.Cell>
+                    ):(
+                    
+                          <Table.Cell>     
+                          <Button auto css={{backgroundColor :'$red600'}}  onPress={handler}> 
+                              Delete
+                            </Button>
+                            <Modal
+                              closeButton
+                              aria-labelledby="modal-title"
+                              open={visible1}
+                              onClose={closeHandler}
+                            >
+                              <Modal.Header>
+                                <Text id="modal-title" size={18}>
+                                  Are you sure
+                                  <Text b size={18}>
+                                    Delete this topic ??
+                                  </Text>
+                                </Text>
+                              </Modal.Header>
+                              
+                              <Modal.Footer>
+                                <Button auto flat color="error"
+                                onPress={closeHandler}
+                                >
+                                  No
+                                </Button>
+                                <Button auto css={{backgroundColor :'$cyan700'}} 
+                                onPress={closeHandler} 
+                                // onClick={()=> handleDeleteTopic(topic.id)} 
+                                >
+                                  Yes
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
+                          </Table.Cell>
+                    )
+                     }
+                  </Table.Row>
                 ))}
-              </ul>
-          </Table.Cell>
-          <Table.Cell>
-            {form.answer}
-          </Table.Cell>
-          <Table.Cell>
-        <Button auto css={{backgroundColor :'$red600'}}  onPress={handler}>
-        Delete
-       </Button>
-      <Modal
-        closeButton
-        aria-labelledby="modal-title"
-        open={visible1}
-        onClose={closeHandler}
-      >
-        <Modal.Header>
-          <Text id="modal-title" size={18}>
-            Are you sure
-            <Text b size={18}>
-              Delete this topic ??
-            </Text>
-          </Text>
-        </Modal.Header>
-        
-        <Modal.Footer>
-          <Button auto flat color="error" 
-          onPress={closeHandler}>
-            No
-          </Button>
-          <Button auto css={{backgroundColor :'$cyan700'}} onPress={closeHandler} 
-        //   onClick={()=> handleDeleteTopic(form.id)} 
-           >
-            Yes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-          </Table.Cell>
-        </Table.Row>
-
-        ))}
-      </Table.Body>
-    </Table>
+              </Table.Body>
+        </Table>
         </div>
       </div>
     </div>

@@ -36,7 +36,6 @@ const Homepage = () => {
               <Button variant="gradient" size="sm"  className="mt-6 bg-cyan-600 hover:bg-cyan-800 text-white rounded-lg">
             <span>
               Start Quiz
-
               </span>
           </Button>
               </a>

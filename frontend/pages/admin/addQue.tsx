@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Button, Modal,Text } from '@nextui-org/react';
 import { Table } from 'flowbite-react'
 import CommonDash from './commonDash';
-
-
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
 type FormValues = {
     topic: string;
     questionType: string;
@@ -75,7 +75,7 @@ const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             }));
             setNewOption('');
           }else {
-            alert('Please provide four option')
+            toast.error('Please Provide Only Four Options')
           }
         }
   };
@@ -94,6 +94,12 @@ const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         },
         body : JSON.stringify({ ...formValues})
     });
+    if(response.ok){
+      toast.success('Question added');
+      setFormValues({} as FormValues);
+    }else{
+      toast.error('Failed to add')
+    }
     console.log('jhjh' , response);
     
   };
@@ -233,7 +239,7 @@ const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                 </div>
 
                 <button type="submit" className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">
-                    Submit
+                    Add Question
                 </button>
                 </form>
 
