@@ -43,15 +43,13 @@ module.exports = {
   //List all question by topic
   listQueByTopic : async(req,res)=>{
     let topicId = req.params.id;
-    // const limit = 1;
-    // let {page} = req.query;
-    // if(page == undefined){
-    //   page = 1;
-    // }
-    // let skip = (page - 1) * limit
-    // let topic = await Topic.find({id:topicId , isDeleted:false}).populate('question',{limit:limit , skip:skip})
+    let page = parseInt(req.query.page) || 1 ;
+    let limit = 1;
 
-    let topic = await Topic.find({id : topicId , isDeleted:false}).populate('question')
+    let topic = await Topic.find({id : topicId , isDeleted:false})
+    .populate('question' , { skip : (page -1) * limit , limit:limit})
+    
+    let findQue = await Topic.find({id : topicId , isDeleted:false}).populate('question')
     if(!topic){
       return res.status(404).json({
         message :'topic not found'
@@ -59,8 +57,10 @@ module.exports = {
     }
       return res.status(200).json({
         message :'quesions',
-        // totalQuestions: topic[0].question.length,
-        Questions : topic
+        currentPage : page,
+        totalPage : Math.ceil(findQue[0].question.length),
+        
+        Questions : topic[0].question
 
       })
     
@@ -68,9 +68,18 @@ module.exports = {
 
   //listAll 
   listQue :async(req,res)=>{
-    let findAll = await Questions.find().populateAll()
+    let {page} = req.query
+    console.log(page);
+    let limit = 5
+    if( page == undefined){
+      page = 1
+    }
+    let skip = (page -1)*limit
+    let findAll = await Topic.find({isDeleted:false}).skip(skip).limit(limit)
+    .populate('question' )
     return res.status(200).json({
-      all : findAll
+      all : findAll,
+      length : findAll[0].question.length
     })
   }
 
