@@ -1,5 +1,9 @@
 {
     "version": 2,
+    "env" : {
+        "DATABASE_URL" : "postgresql://postgres:pappa@localhost:5432/Quiz",
+        "JWT_KEY" : "secret"
+    },
     "builds": [
       {
         "src": "app.js",
